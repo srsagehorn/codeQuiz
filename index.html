@@ -15,7 +15,6 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
-    <script src="scripts.js"></script>
 
     <title>Sagehorn HW4</title>
   </head>
@@ -35,30 +34,39 @@
         limit. Keep in mind that incorrect answers will penalize your socre time
         by ten seconds.
       </p>
-      <button type="button" class="btn btn-primary">Start Quiz</button>
+      <button id="start" type="button" class="btn btn-info">Start Quiz</button>
     </div>
 
     <!-- quiz contents -->
-    <div class="container col-sm-6 opening">
-      <h2 style="text-align: center;">Coding Quiz Challenge</h2>
-      <p style="text-align: center;">
-        Try to answer the following code-related questions within the time
-        limit. Keep in mind that incorrect answers will penalize your socre time
-        by ten seconds.
-      </p>
-      <button type="button" class="btn btn-primary btn-block">
-        Start Quiz
-      </button>
-      <button type="button" class="btn btn-primary btn-block">
-        Start Quiz
-      </button>
-      <button type="button" class="btn btn-primary btn-block">
-        Start Quiz
-      </button>
-      <button type="button" class="btn btn-primary btn-block">
-        Start Quiz
-      </button>
+    <div
+      class="container col-sm-6 quiz"
+      hidden="true"
+      style="text-align: left;"
+    >
+      <h2 id="question"></h2>
+      <button
+        type="button"
+        class="btn btn-info btn-block btn-group ans"
+        style="text-align: left;"
+      ></button>
+      <button
+        type="button"
+        class="btn btn-info btn-block btn-group ans"
+        style="text-align: left;"
+      ></button>
+      <button
+        type="button"
+        class="btn btn-info btn-block btn-group ans"
+        style="text-align: left;"
+      ></button>
+      <button
+        type="button"
+        class="btn btn-info btn-block btn-group ans"
+        style="text-align: left;"
+      ></button>
     </div>
+    <!-- correct/wrong alert -->
+    <h3 class="alert"></h3>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -77,5 +85,6 @@
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"
     ></script>
+    <script src="script.js"></script>
   </body>
 </html>
