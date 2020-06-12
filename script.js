@@ -1,3 +1,5 @@
+// variables
+var score = 0;
 var qna = [
   {
     q: "Commonly used data types DO NOT include:",
@@ -34,34 +36,49 @@ var qna = [
   },
 ];
 
+var qNum = 0;
+
 // when you press the star button, the opening screen hides and the questions show
+
+// functions
+function qsnAs() {
+  $("#question").text(qna[qNum].q);
+  console.log(qna[qNum].q);
+
+  for (var j = 0; j < 4; j++) {
+    $(".ans" + j).append();
+    $(".ans" + j).text(qna[qNum].a[j]);
+    console.log(qna[qNum].a[j]);
+  }
+  qNum++;
+}
+
+// logic
 $("#start").on("click", function () {
   $(".opening").attr("hidden", "true");
   $(".quiz").removeAttr("hidden");
 
-  for (var i = 0; i < qna.length; i++) {
-    $("#question").text(qna[i].q);
-    $("#question").append();
-    console.log(qna[i].q);
-
-    for (var j = 0; j < 4; j++) {
-      $(".ans").each(function () {
-        $(".ans").append();
-        $(".ans").text(qna[i].a[j]);
-        $(".ans").append();
-        console.log(qna[i].a[j]);
-      });
-    }
-  }
+  // for (var i = 0; i < qna.length; i++) {
+  qsnAs();
 });
 
+$(".btn-block").on("click", function () {
+  qsnAs();
+});
+
+// // click event to see which one is right and iterate to next for loop
+
+// alert result and subtract from time/add to score
 $(".ans").on("click", function () {
   if (correct) {
     $(".alert").text("Correct!");
+    score += 10;
   }
   $(".alert").text("Wrong");
+  //   -10sec from timer
+  $(".alert").append();
+  $("#hScore").append(score);
 });
-// need to say if question 0, put ans0 into array but for each iteration
 
 // for each q and a
 // set  class question type to questions[i]
