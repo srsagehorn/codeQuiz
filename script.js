@@ -1,9 +1,13 @@
 // variables
 var score = 0;
+var qNum = 0;
 var qna = [
   {
     q: "Commonly used data types DO NOT include:",
     a: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
+    // alerts 3
+    correct: 2,
+    final: false,
   },
 
   {
@@ -14,6 +18,8 @@ var qna = [
       "3. parentheses",
       "4. square brackets",
     ],
+    correct: 2,
+    final: false,
   },
   {
     q: "Arrays in JavaScript can be used to store ________.",
@@ -23,70 +29,105 @@ var qna = [
       "3. booleans",
       "4. all of the above",
     ],
+    correct: 3,
+    final: false,
   },
   {
     q:
       "String values must be enclosed within _______ when being assigned to variables.",
     a: ["1. commas", "2. curly brackets", "3. quotes", "4. parentheses"],
+    correct: 3,
+    final: false,
   },
   {
     q:
       "A very useful tool used during development and debugging for printing content to the debugger is:",
     a: ["1. JavaScript", "2. terminal/bash", "3. for loops", "4. console log"],
+    correct: 3,
+    final: true,
   },
 ];
 
-var qNum = 0;
-
-// when you press the star button, the opening screen hides and the questions show
-
 // functions
 function qsnAs() {
+  // set question text
   $("#question").text(qna[qNum].q);
   console.log(qna[qNum].q);
-
+  // set button texts to answers
   for (var j = 0; j < 4; j++) {
     $(".ans" + j).append();
     $(".ans" + j).text(qna[qNum].a[j]);
     console.log(qna[qNum].a[j]);
   }
+  // increase the qNum
   qNum++;
+}
+// function to establish if user clicked the correct answer, adjust hScore and time
+
+// if answer is right then
+function right() {
+  // alert correct
+  $(".alert").text("Correct!");
+  console.log("right");
+  // add to the high score
+  score += 10;
+  $("#hScore").text(score);
+  // move to next question
+  qsnAs();
+}
+
+// if answer is wrong then
+function wrong() {
+  // alert wrong
+  $(".alert").text("Wrong!");
+  console.log("wrong");
+  // move to next question
+  qsnAs();
+}
+
+// was their answer right or wrong
+function selectAns(index) {
+  // if it is the final question
+  if (qna[qNum].final) {
+    // hide the quiz and show end screen
+    $(".quiz").attr("hidden", "true");
+    $(".finalScreen").removeAttr("hidden");
+    // populate with score
+    $(".finalScore").text(score);
+  }
+  // they are correct
+  if (qna[qNum - 1].correct == index) {
+    right();
+  }
+  // they are wrong
+  else {
+    wrong();
+  }
 }
 
 // logic
+// start quiz when its clicked
 $("#start").on("click", function () {
+  // hide start screen, show quiz
   $(".opening").attr("hidden", "true");
   $(".quiz").removeAttr("hidden");
-
-  // for (var i = 0; i < qna.length; i++) {
+  // populate  question and answers
   qsnAs();
 });
 
-$(".btn-block").on("click", function () {
-  qsnAs();
+// buttons that run the right or wrong function
+$(".ans0").on("click", function () {
+  selectAns(0);
 });
 
-// // click event to see which one is right and iterate to next for loop
-
-// alert result and subtract from time/add to score
-$(".ans").on("click", function () {
-  if (correct) {
-    $(".alert").text("Correct!");
-    score += 10;
-  }
-  $(".alert").text("Wrong");
-  //   -10sec from timer
-  $(".alert").append();
-  $("#hScore").append(score);
+$(".ans1").on("click", function () {
+  selectAns(1);
 });
 
-// for each q and a
-// set  class question type to questions[i]
-// populate buttons with ansx text
-// add event listeners to button, alert correct or wrong
-//  update score
+$(".ans2").on("click", function () {
+  selectAns(2);
+});
 
-// show first question and answers
-// add event listeners to button, alert correct or wrong
-// show different questions and answers
-// change alert
+$(".ans3").on("click", function () {
+  selectAns(3);
+});
