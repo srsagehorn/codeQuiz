@@ -66,9 +66,9 @@
       ></button>
       <h3 class="alert"></h3>
     </div>
-    <!-- correct/wrong alert -->
+    <!-- Final Screen -->
     <div
-      class="container col-sm-6 finalScreen"
+      class="container col-sm-8 finalScreen"
       hidden="true"
       style="text-align: left;"
     >
@@ -78,14 +78,31 @@
           >Your Initials:
         </label>
         <div class="col-sm-8">
-          <input />
-        </div>
-        <div class="col-sm-10">
-          <p>Your score is: <span class="finalScore"></span></p>
+          <input class="initials" />
         </div>
       </div>
-    </div>
+        <p>Your score is: <span class="finalScore"></span></p>
+        <button type="button" class="btn btn-info restart">Retry</button>
+        <br>
+        <div class="card" style="width: 18rem;">
+          <div class="card-header">
+            High Scores
+          </div>
+          <ul class="list-group list-group-flush pastScores"></ul>
+        </div>
 
+    <!-- Out of time screen -->
+    <div
+      style="text-align: center;"
+      class="container col-sm-6 fail"
+      hidden="true"
+    >
+      <h2>FAIL</h2>
+      <p>
+        You ran out of time
+      </p>
+      <button type="button" class="btn btn-info restart">Retry</button>
+    </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

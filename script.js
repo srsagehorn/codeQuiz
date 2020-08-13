@@ -1,6 +1,7 @@
 // variables
 var score = 0;
 var qNum = 0;
+var count = 60;
 var qna = [
   {
     q: "Commonly used data types DO NOT include:",
@@ -49,7 +50,7 @@ var qna = [
 ];
 
 // functions
-function qsnAs() {
+function nextQuestion() {
   // set question text
   $("#question").text(qna[qNum].q);
   console.log(qna[qNum].q);
@@ -73,7 +74,7 @@ function right() {
   score += 10;
   $("#hScore").text(score);
   // move to next question
-  qsnAs();
+  nextQuestion();
 }
 
 // if answer is wrong then
@@ -81,8 +82,9 @@ function wrong() {
   // alert wrong
   $(".alert").text("Wrong!");
   console.log("wrong");
+  count -= 10;
   // move to next question
-  qsnAs();
+  nextQuestion();
 }
 
 // was their answer right or wrong
@@ -105,6 +107,14 @@ function selectAns(index) {
   }
 }
 
+function outofTime() {
+  $(".quiz").attr("hidden", "true");
+  $(".fail").removeAttr("hidden");
+  $("#hScore").text("");
+  $("#countDn").text("");
+  $(".finalScreen").attr("hidden", "true");
+}
+
 // logic
 // start quiz when its clicked
 $("#start").on("click", function () {
@@ -112,7 +122,22 @@ $("#start").on("click", function () {
   $(".opening").attr("hidden", "true");
   $(".quiz").removeAttr("hidden");
   // populate  question and answers
-  qsnAs();
+  nextQuestion();
+  // start timer
+  timer = setInterval(function timer() {
+    $("#countDn").text(count--);
+    if (count == 0) {
+      outofTime();
+      $("#countDn").text("");
+    }
+  }, 1000);
+});
+
+// restart button
+$(".restart").on("click", function () {
+  $(".finalScreen").attr("hidden", "true");
+  $(".fail").attr("hidden", "true");
+  $(".opening").removeAttr("hidden");
 });
 
 // buttons that run the right or wrong function
@@ -131,3 +156,19 @@ $(".ans2").on("click", function () {
 $(".ans3").on("click", function () {
   selectAns(3);
 });
+
+// function setStorage() {
+//   localStorage.setItem(init, $(".initials").val)
+//   localStorage.setItem(score, $("#hScore"))
+// }
+
+// function pastScores {
+// var init = localStorage.getItem(init)
+// var score = localStorage.getItem(init)
+// $(".pastScores").text("<li class="list-group-item">" + init + ":" +  score + "</li>")
+// }
+
+// make timer stop
+// save score/initials to local storage
+// populate lcoal storage onto page onto screen somewhere
+// restart button redoes timer, score, and questions
